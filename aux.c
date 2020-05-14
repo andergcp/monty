@@ -58,14 +58,16 @@ void checkNum(gralStruct *gs)
 	if (!gs->args[1])
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", gs->lineNumber);
-		freeall(gs), exit(EXIT_FAILURE);
+		freeall(gs);
+		exit(EXIT_FAILURE);
 	}
 	while (gs->args[1][counter])
 	{
 		if (!isdigit(gs->args[1][counter]) && gs->args[1][0] != '-')
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", gs->lineNumber);
-			freeall(gs), exit(EXIT_FAILURE);
+			freeall(gs);
+			exit(EXIT_FAILURE);
 		}
 		counter++;
 	}
