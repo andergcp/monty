@@ -16,7 +16,6 @@ void _strtok(gralStruct *gs)
 		counter++;
 	}
 	gs->args[counter] = NULL;
-	return (0);
 }
 /**
  * executeOp - Looks for the opcode function and if it's found execute it
