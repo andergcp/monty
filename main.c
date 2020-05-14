@@ -111,8 +111,6 @@ int main(int argc, char **argv)
 		res = executeOp(gs);
 		if (gs->args[0][0] == '#')
 		{
-			gs->args[0] = NULL;
-			gs->args[1] = NULL;
 			gs->lineNumber++;
 			continue;
 		}
@@ -125,5 +123,5 @@ int main(int argc, char **argv)
 		gs->lineNumber++;
 	}
 	freeall(gs);
-	return (0);
+	exit (EXIT_SUCCESS);
 }
