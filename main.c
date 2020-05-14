@@ -122,8 +122,6 @@ int main(int argc, char **argv)
 				gs->lineNumber, gs->args[0]);
 			freeall(gs), exit(EXIT_FAILURE);
 		}
-		gs->args[0] = NULL;
-		gs->args[1] = NULL;
 		gs->lineNumber++;
 	}
 	freeall(gs);
