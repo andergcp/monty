@@ -1,5 +1,7 @@
 #include "monty.h"
 
+gralStruct *gs;
+
 /**
  * initialize - Asign initial values to the elements of the general struct
  * @argv: Double pointer to arguments passed to the program
