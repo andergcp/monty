@@ -26,6 +26,16 @@ int executeOp(gralStruct *gs)
 {
 	int counter = 0;
 
+	if (strcmp(gs->args[0], "stack") == 0)
+	{
+		gs->modeSQ = 0;
+		return (1);
+	}
+	else if (strcmp(gs->args[0], "queue") == 0)
+	{
+		gs->modeSQ = 1;
+		return (1);
+	}
 	while (gs->dicciop[counter].opcode)
 	{
 		if (strcmp(gs->args[0], gs->dicciop[counter].opcode) == 0)

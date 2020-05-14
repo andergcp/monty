@@ -6,7 +6,7 @@
  */
 void push(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
-	stack_t *new_node;
+	stack_t *new_node, *tmp;
 
 	checkNum(gs);
 	new_node = malloc(sizeof(stack_t));
@@ -17,11 +17,23 @@ void push(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	new_node->n = atoi(gs->args[1]);
-	new_node->next = *stack;
-	if (*stack)
-		new_node->next->prev = new_node;
-	*stack = new_node;
-	new_node->prev = NULL;
+	if (gs->modeSQ == 0 || !*stack)
+	{
+		new_node->next = *stack;
+		if (*stack)
+			new_node->next->prev = new_node;
+		*stack = new_node;
+		new_node->prev = NULL;
+	}
+	else
+	{
+		tmp = *stack;
+		while (tmp->next)
+			tmp = tmp->next;
+		new_node->next = NULL;
+		new_node->prev = tmp;
+		tmp->next = new_node;
+	}
 }
 /**
  * pall - prints all the values on the stack, starting

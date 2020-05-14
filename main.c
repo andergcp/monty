@@ -77,6 +77,7 @@ gralStruct *initialize(char **argv)
 	gs->stack = NULL;
 	gs->lineNumber = 1;
 	gs->montyFile = NULL;
+	gs->modeSQ = 0;
 	return (gs);
 }
 /**
