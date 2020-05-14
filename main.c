@@ -65,7 +65,11 @@ int main(int argc, char **argv)
 			continue;
 		res = executeOp(gs);
 		if (isComment(gs) == 1)
+		{
+			nullargs(gs);
+			gs->lineNumber++;
 			continue;
+		}
 		if (res == 0)
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n",

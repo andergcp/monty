@@ -8,11 +8,11 @@ void _strtok(gralStruct *gs)
 	int counter = 0;
 	char *tmp;
 /*Tokenizes the buffer*/
-	tmp = strtok(gs->buffer, " \n");
+	tmp = strtok(gs->buffer, " \n\t");
 	while (tmp && counter < 2)
 	{
 		gs->args[counter] = tmp;
-		tmp = strtok(NULL, " \n");
+		tmp = strtok(NULL, " \n\t");
 		counter++;
 	}
 	gs->args[counter] = NULL;
@@ -104,7 +104,7 @@ void checkNum(gralStruct *gs)
 	{
 		if (!isdigit(gs->args[1][counter]))
 		{
-			fprintf(stderr, "L%i: usage: push integer\n", gs->lineNumber);
+			fprintf(stderr, "L%u: usage: push integer\n", gs->lineNumber);
 			freeall(gs), exit(EXIT_FAILURE);
 		}
 		counter++;

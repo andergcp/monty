@@ -21,7 +21,7 @@ void push(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 		*stack = new_node;
 		new_node->next = NULL;
 	}
-	else if (*stack)
+	else
 	{
 		new_node->next = *stack;
 		*stack = new_node;
