@@ -38,7 +38,6 @@ __attribute__((unused)) unsigned int line_number)
  */
 void sub(stack_t **stack, unsigned int line_number)
 {
-	int result;
 	stack_t *tmp;
 
 	if (!*stack || !gs->stack->next)
@@ -48,8 +47,7 @@ void sub(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	tmp = *stack;
-	result = tmp->n - tmp->next->n;
-	tmp->next->n = result;
+	tmp->next->n = tmp->next->n - tmp->n;
 	pop(&gs->stack, gs->lineNumber);
 }
 /**
