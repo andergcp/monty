@@ -121,5 +121,7 @@ void freeall(gralStruct *gs)
 	free(gs->args);
 	free(gs->dicciop);
 	freestack(gs);
+	fclose(gs->montyFile);
 	free(gs);
+
 }

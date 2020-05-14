@@ -25,3 +25,14 @@ void freestack(gralStruct *gs)
 		free(gs->stack);
 	}
 }
+/**
+ * isComment - Validates if a line is a comment
+ * @gs: General struct of the program
+ * Return: 1 if the read line is a comment, 0 otherwise
+ */
+int isComment(gralStruct *gs)
+{
+	if (gs->args[0][0] == '#')
+		return (1);
+	return (0);
+}

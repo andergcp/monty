@@ -5,18 +5,49 @@
  * @stack: Double pointer to double linked list of elements stack'ed
  * @line_number: Number of line read from input file
  */
-void mod(__attribute__((unused)) stack_t **stack,
-__attribute__((unused)) unsigned int line_number)
+void mod(stack_t **stack, unsigned int line_number)
 {
+	int result;
+	stack_t *tmp;
+
+	if (!*stack || !gs->stack->next)
+	{
+		printf("L%u: can't mod, stack too short\n", line_number);
+		freeall(gs);
+		exit(EXIT_FAILURE);
+	}
+	tmp = *stack;
+	if (tmp->n == 0)
+	{
+		printf("L%u: division by zero\n", line_number);
+		freeall(gs);
+		exit(EXIT_FAILURE);
+	}
+	result = tmp->next->n % tmp->n;
+	tmp->next->n = result;
+	pop(&gs->stack, gs->lineNumber);
 }
 /**
  * pchar - prints the char at the top of the stack, followed by a new line.
  * @stack: Double pointer to double linked list of elements stack'ed
  * @line_number: Number of line read from input file
  */
-void pchar(__attribute__((unused)) stack_t **stack,
-__attribute__((unused)) unsigned int line_number)
+void pchar(stack_t **stack, unsigned int line_number)
 {
+	if (!*stack)
+	{
+		printf("L%u: can't pchar, stack empty\n", line_number);
+		freeall(gs);
+		exit(EXIT_FAILURE);
+	}
+	if (gs->stack->n > 127 || gs->stack->n < 0)
+	{
+		printf("L%u: can't pchar, value out of range\n", line_number);
+		freeall(gs);
+		exit(EXIT_FAILURE);
+	}
+	putchar(gs->stack->n);
+	puts("");
 }
 /**
  * pstr - prints the string starting at the top of the stack,
@@ -24,18 +55,43 @@ __attribute__((unused)) unsigned int line_number)
  * @stack: Double pointer to double linked list of elements stack'ed
  * @line_number: Number of line read from input file
  */
-void pstr(__attribute__((unused)) stack_t **stack,
-__attribute__((unused)) unsigned int line_number)
+void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
+	stack_t *tmp;
+
+	if (!*stack)
+		puts("");
+	tmp = *stack;
+	while (tmp)
+	{
+		if (tmp->n > 127 || tmp->n <= 0)
+			break;
+		putchar(tmp->n);
+		tmp = tmp->next;
+	}
+	puts("");
 }
 /**
  * rotl - rotates the stack to the top.
  * @stack: Double pointer to double linked list of elements stack'ed
  * @line_number: Number of line read from input file
  */
-void rotl(__attribute__((unused)) stack_t **stack,
-__attribute__((unused)) unsigned int line_number)
+void rotl(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
+	stack_t *tmp, *tmp2;
+
+	if (*stack && gs->stack->next)
+	{
+		tmp = *stack;
+		tmp2 = *stack;
+		while (tmp2->next)
+			tmp2 = tmp2->next;
+		tmp->next->prev = NULL;
+		*stack = tmp->next;
+		tmp->prev = tmp2;
+		tmp->next = NULL;
+		tmp2->next = tmp;
+	}
 }
 /**
  * rotr - rotates the stack to the bottom.
@@ -45,4 +101,18 @@ __attribute__((unused)) unsigned int line_number)
 void rotr(__attribute__((unused)) stack_t **stack,
 __attribute__((unused)) unsigned int line_number)
 {
+	stack_t *tmp, *tmp2;
+
+	if (*stack && gs->stack->next)
+	{
+		tmp = *stack;
+		tmp2 = *stack;
+		while (tmp2->next)
+			tmp2 = tmp2->next;
+		tmp2->prev->next = NULL;
+		tmp2->prev = NULL;
+		tmp2->next = tmp;
+		tmp->prev = tmp2;
+		*stack = tmp2;
+	}
 }

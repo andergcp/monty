@@ -54,26 +54,63 @@ void pall(stack_t **stack, __attribute__((unused)) unsigned int line_number)
  * @stack: Double pointer to double linked list of elements stack'ed
  * @line_number: Number of line read from input file
  */
-void pint(__attribute__((unused)) stack_t **stack,
-__attribute__((unused)) unsigned int line_number)
+void pint(stack_t **stack, unsigned int line_number)
 {
-
+	if (*stack)
+		printf("%i\n", gs->stack->n);
+	else
+	{
+		printf("L%u: can't pint, stack empty\n", line_number);
+		freeall(gs);
+		exit(EXIT_FAILURE);
+	}
 }
 /**
  * pop - removes the top element of the stack.
  * @stack: Double pointer to double linked list of elements stack'ed
  * @line_number: Number of line read from input file
  */
-void pop(__attribute__((unused)) stack_t **stack,
-__attribute__((unused)) unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_number)
 {
+	stack_t *tmp;
+
+	if (*stack)
+	{
+		tmp = *stack;
+		if (tmp->next)
+			tmp->next->prev = NULL;
+		*stack = tmp->next;
+		free(tmp);
+	}
+	else
+	{
+		printf("L%u: can't pop an empty stack\n", line_number);
+		freeall(gs);
+		exit(EXIT_FAILURE);
+	}
+
 }
 /**
  * swap - swaps the top two elements of the stack.
  * @stack: Double pointer to double linked list of elements stack'ed
  * @line_number: Number of line read from input file
  */
-void swap(__attribute__((unused)) stack_t **stack,
-__attribute__((unused)) unsigned int line_number)
+void swap(stack_t **stack, unsigned int line_number)
 {
+	stack_t *tmp, *tmp2;
+
+	if (!*stack || !gs->stack->next)
+	{
+		printf("L%u: can't swap, stack too short\n", line_number);
+		freeall(gs);
+		exit(EXIT_FAILURE);
+	}
+	tmp = *stack;
+	tmp2 = tmp->next;
+	tmp->next->prev = NULL;
+	if (tmp->next->next)
+		tmp->next->next->prev = tmp;
+	tmp->next = tmp->next->next;
+	tmp2->next = tmp;
+	gs->stack = tmp2;
 }

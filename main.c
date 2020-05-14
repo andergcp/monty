@@ -32,6 +32,7 @@ gralStruct *initialize(char **argv)
 	gs->stack = NULL;
 	gs->lineNumber = 1;
 	gs->valueToPush = 0;
+	gs->montyFile = NULL;
 	return (gs);
 }
 /**
@@ -42,23 +43,29 @@ gralStruct *initialize(char **argv)
  */
 int main(int argc, char **argv)
 {
-	FILE *montyFile;
 	int res = 0;
 /*Checks if user has passed 1 argument to the program*/
 	if (argc != 2)
 		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
-/*Opens file passed to the program*/
-	montyFile = fopen(argv[1], "r");
-	if (!montyFile)
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]), exit(EXIT_FAILURE);
+/*Initializes general struct of the program*/
 	gs = initialize(argv);
+/*Opens file passed to the program*/
+	gs->montyFile = fopen(argv[1], "r");
+	if (!gs->montyFile)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		freeall(gs);
+		exit(EXIT_FAILURE);
+	}
 /*Gets and deals with each line of the file*/
-	while (fgets(gs->buffer, gs->bufferSize, montyFile))
+	while (fgets(gs->buffer, gs->bufferSize, gs->montyFile))
 	{
 		_strtok(gs);
 		if (!gs->args[0])
 			continue;
 		res = executeOp(gs);
+		if (isComment(gs) == 1)
+			continue;
 		if (res == 0)
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n",
@@ -68,7 +75,6 @@ int main(int argc, char **argv)
 		nullargs(gs);
 		gs->lineNumber++;
 	}
-	fclose(montyFile);
 	freeall(gs);
 	return (0);
 }

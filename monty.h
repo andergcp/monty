@@ -47,6 +47,7 @@ typedef struct instruction_s
  * @bufferSize: Fixed sixe to be read per line of file
  * @valueToPush: Argument passed to push opcode
  * @modeSQ: Mode of storing elements in stack, 0 = stack-mode, 1 = queue-mode
+ * @montyFile: Input file opened
  */
 typedef struct generalStruct
 {
@@ -59,6 +60,7 @@ typedef struct generalStruct
 	int bufferSize;
 	int valueToPush;
 	int modeSQ;
+	FILE *montyFile;
 } gralStruct;
 
 extern gralStruct *gs;
@@ -72,6 +74,7 @@ void checkNum(gralStruct *gs);
 void freeall(gralStruct *gs);
 void nullargs(gralStruct *gs);
 void freestack(gralStruct *gs);
+int isComment(gralStruct *gs);
 
 /*opcode functions*/
 void push(stack_t **stack, unsigned int line_number);
