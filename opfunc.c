@@ -7,6 +7,7 @@
 void push(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
 	stack_t *new_node;
+
 	checkNum(gs);
 	new_node = malloc(sizeof(stack_t));
 	if (!new_node)
