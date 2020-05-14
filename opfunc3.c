@@ -60,11 +60,14 @@ void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	stack_t *tmp;
 
 	if (!*stack)
+	{
 		puts("");
+		return;
+	}
 	tmp = *stack;
 	while (tmp)
 	{
-		if (tmp->n > 127 || tmp->n <= 0)
+		if (isascii(tmp->n) == 0)
 			break;
 		putchar(tmp->n);
 		tmp = tmp->next;
