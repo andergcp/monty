@@ -101,10 +101,11 @@ void swap(stack_t **stack, unsigned int line_number)
 	}
 	tmp = *stack;
 	tmp2 = tmp->next;
-	tmp->next->prev = NULL;
-	if (tmp->next->next)
-		tmp->next->next->prev = tmp;
-	tmp->next = tmp->next->next;
+	tmp2->prev = NULL;
+	if (tmp2->next)
+		tmp2->next->prev = tmp;
+	tmp->next = tmp2->next;
+	tmp->prev = tmp2;
 	tmp2->next = tmp;
-	gs->stack = tmp2;
+	*stack = tmp2;
 }
