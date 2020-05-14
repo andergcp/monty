@@ -50,7 +50,7 @@ void pall(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 		tmp = *stack;
 		while (tmp)
 		{
-			printf("%i\n", tmp->n);
+			printf("%d\n", tmp->n);
 			tmp = tmp->next;
 		}
 	}
