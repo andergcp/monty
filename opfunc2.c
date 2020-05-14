@@ -4,7 +4,7 @@
  * @stack: Double pointer to double linked list of elements stack'ed
  * @line_number: Number of line read from input file
  */
-void add(__attribute__((unused)) stack_t **stack,
+void add(stack_t **stack,
 __attribute__((unused)) unsigned int line_number)
 {
 	int result;
