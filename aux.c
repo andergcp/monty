@@ -30,8 +30,6 @@ int executeOp(gralStruct *gs)
 	{
 		if (strcmp(gs->args[0], gs->dicciop[counter].opcode) == 0)
 		{
-			if (strcmp(gs->args[0], "push") == 0)
-				checkNum(gs);
 			gs->dicciop[counter].f(&(gs->stack), gs->lineNumber);
 			return (1);
 		}
@@ -109,7 +107,6 @@ void checkNum(gralStruct *gs)
 		}
 		counter++;
 	}
-	gs->valueToPush = atoi(gs->args[1]);
 }
 /**
  * freeall - Free all memory allocated in the program
@@ -121,7 +118,8 @@ void freeall(gralStruct *gs)
 	free(gs->args);
 	free(gs->dicciop);
 	freestack(gs);
-	fclose(gs->montyFile);
+	if (gs->montyFile)
+		fclose(gs->montyFile);
 	free(gs);
 
 }

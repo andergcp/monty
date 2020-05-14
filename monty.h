@@ -45,7 +45,6 @@ typedef struct instruction_s
  * @stack: Pointer to double linked list of stack'ed elements
  * @lineNumber: Number of the line read from the input file
  * @bufferSize: Fixed sixe to be read per line of file
- * @valueToPush: Argument passed to push opcode
  * @modeSQ: Mode of storing elements in stack, 0 = stack-mode, 1 = queue-mode
  * @montyFile: Input file opened
  */
@@ -58,7 +57,6 @@ typedef struct generalStruct
 	stack_t *stack;
 	unsigned int lineNumber;
 	int bufferSize;
-	int valueToPush;
 	int modeSQ;
 	FILE *montyFile;
 } gralStruct;

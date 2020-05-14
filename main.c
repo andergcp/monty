@@ -12,7 +12,7 @@ gralStruct *initialize(char **argv)
 	gs = malloc(sizeof(gralStruct));
 	if (!gs)
 		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
-	gs->bufferSize = 1024;
+	gs->bufferSize = 2048;
 	gs->buffer = malloc(gs->bufferSize);
 	if (!gs->buffer)
 		fprintf(stderr, "Error: malloc failed\n"), free(gs), exit(EXIT_FAILURE);
@@ -31,7 +31,6 @@ gralStruct *initialize(char **argv)
 	}
 	gs->stack = NULL;
 	gs->lineNumber = 1;
-	gs->valueToPush = 0;
 	gs->montyFile = NULL;
 	return (gs);
 }

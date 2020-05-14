@@ -7,7 +7,7 @@
 void push(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
 	stack_t *new_node;
-
+	checkNum(gs);
 	new_node = malloc(sizeof(stack_t));
 	if (!new_node)
 	{
@@ -15,7 +15,7 @@ void push(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 		freeall(gs);
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = gs->valueToPush;
+	new_node->n = atoi(gs->args[1]);
 	if (!*stack)
 	{
 		*stack = new_node;
