@@ -17,17 +17,10 @@ void push(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	new_node->n = atoi(gs->args[1]);
-	if (!*stack)
-	{
-		*stack = new_node;
-		new_node->next = NULL;
-	}
-	else
-	{
-		new_node->next = *stack;
-		*stack = new_node;
+	new_node->next = *stack;
+	if (*stack)
 		new_node->next->prev = new_node;
-	}
+	*stack = new_node;
 	new_node->prev = NULL;
 }
 /**

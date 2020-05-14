@@ -70,7 +70,6 @@ int executeOp(gralStruct *gs);
 instruction_t *dic_op();
 void checkNum(gralStruct *gs);
 void freeall(gralStruct *gs);
-void nullargs(gralStruct *gs);
 void freestack(gralStruct *gs);
 int isComment(gralStruct *gs);
 

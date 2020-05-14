@@ -38,52 +38,6 @@ int executeOp(gralStruct *gs)
 	return (0);
 }
 /**
- * dic_op - Creates an array of paires opcode-function
- * Return: A pointer to the array crated
- */
-instruction_t *dic_op()
-{
-	instruction_t *arrayOp = malloc(sizeof(instruction_t) * 16);
-
-	if (arrayOp)
-	{
-		arrayOp[0].opcode = "push";
-		arrayOp[0].f = push;
-		arrayOp[1].opcode = "pall";
-		arrayOp[1].f = pall;
-		arrayOp[2].opcode = "pint";
-		arrayOp[2].f = pint;
-		arrayOp[3].opcode = "pop";
-		arrayOp[3].f = pop;
-		arrayOp[4].opcode = "swap";
-		arrayOp[4].f = swap;
-		arrayOp[5].opcode = "add";
-		arrayOp[5].f = add;
-		arrayOp[6].opcode = "nop";
-		arrayOp[6].f = nop;
-		arrayOp[7].opcode = "sub";
-		arrayOp[7].f = sub;
-		arrayOp[8].opcode = "div";
-		arrayOp[8].f = div_s;
-		arrayOp[9].opcode = "mul";
-		arrayOp[9].f = mul;
-		arrayOp[10].opcode = "mod";
-		arrayOp[10].f = mod;
-		arrayOp[11].opcode = "pchar";
-		arrayOp[11].f = pchar;
-		arrayOp[12].opcode = "pstr";
-		arrayOp[12].f = pstr;
-		arrayOp[13].opcode = "rotl";
-		arrayOp[13].f = rotl;
-		arrayOp[14].opcode = "rotr";
-		arrayOp[14].f = rotr;
-		arrayOp[15].opcode = NULL;
-		arrayOp[15].f = NULL;
-		return (arrayOp);
-	}
-	return (NULL);
-}
-/**
  * checkNum - Check if the argument passed to push is valid
  * @gs: General struct of the program
  */
@@ -96,8 +50,6 @@ void checkNum(gralStruct *gs)
 		fprintf(stderr, "L%u: usage: push integer\n", gs->lineNumber);
 		freeall(gs), exit(EXIT_FAILURE);
 	}
-	if (gs->args[1][0] == '-')
-		counter++;
 	while (gs->args[1][counter])
 	{
 		if (!isdigit(gs->args[1][counter]) && gs->args[1][counter] != '-')
@@ -121,5 +73,20 @@ void freeall(gralStruct *gs)
 	if (gs->montyFile)
 		fclose(gs->montyFile);
 	free(gs);
-
+}
+/**
+ * freestack - Frees each node in stack
+ * @gs: General struct of the program
+ */
+void freestack(gralStruct *gs)
+{
+	if (gs->stack)
+	{
+		while (gs->stack->next)
+		{
+			gs->stack = gs->stack->next;
+			free(gs->stack->prev);
+		}
+		free(gs->stack);
+	}
 }

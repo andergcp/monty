@@ -3,6 +3,53 @@
 gralStruct *gs;
 
 /**
+ * dic_op - Creates an array of paires opcode-function
+ * Return: A pointer to the array crated
+ */
+instruction_t *dic_op()
+{
+	instruction_t *arrayOp = malloc(sizeof(instruction_t) * 16);
+
+	if (arrayOp)
+	{
+		arrayOp[0].opcode = "push";
+		arrayOp[0].f = push;
+		arrayOp[1].opcode = "pall";
+		arrayOp[1].f = pall;
+		arrayOp[2].opcode = "pint";
+		arrayOp[2].f = pint;
+		arrayOp[3].opcode = "pop";
+		arrayOp[3].f = pop;
+		arrayOp[4].opcode = "swap";
+		arrayOp[4].f = swap;
+		arrayOp[5].opcode = "add";
+		arrayOp[5].f = add;
+		arrayOp[6].opcode = "nop";
+		arrayOp[6].f = nop;
+		arrayOp[7].opcode = "sub";
+		arrayOp[7].f = sub;
+		arrayOp[8].opcode = "div";
+		arrayOp[8].f = div_s;
+		arrayOp[9].opcode = "mul";
+		arrayOp[9].f = mul;
+		arrayOp[10].opcode = "mod";
+		arrayOp[10].f = mod;
+		arrayOp[11].opcode = "pchar";
+		arrayOp[11].f = pchar;
+		arrayOp[12].opcode = "pstr";
+		arrayOp[12].f = pstr;
+		arrayOp[13].opcode = "rotl";
+		arrayOp[13].f = rotl;
+		arrayOp[14].opcode = "rotr";
+		arrayOp[14].f = rotr;
+		arrayOp[15].opcode = NULL;
+		arrayOp[15].f = NULL;
+		return (arrayOp);
+	}
+	return (NULL);
+}
+
+/**
  * initialize - Asign initial values to the elements of the general struct
  * @argv: Double pointer to arguments passed to the program
  * Return: a pointer to the initial gral Struct
@@ -18,14 +65,14 @@ gralStruct *initialize(char **argv)
 	if (!gs->args)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		free(gs->buffer), free(gs), exit(EXIT_FAILURE);
+		free(gs), exit(EXIT_FAILURE);
 	}
 	gs->argv = argv;
 	gs->dicciop = dic_op();
 	if (!gs->dicciop)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		free(gs->args), free(gs->buffer), free(gs), exit(EXIT_FAILURE);
+		free(gs->args), free(gs), exit(EXIT_FAILURE);
 	}
 	gs->stack = NULL;
 	gs->lineNumber = 1;
@@ -61,9 +108,10 @@ int main(int argc, char **argv)
 		if (!gs->args[0])
 			continue;
 		res = executeOp(gs);
-		if (isComment(gs) == 1)
+		if (gs->args[0][0] == '#')
 		{
-			nullargs(gs);
+			gs->args[0] = NULL;
+			gs->args[1] = NULL;
 			gs->lineNumber++;
 			continue;
 		}
@@ -73,7 +121,8 @@ int main(int argc, char **argv)
 				gs->lineNumber, gs->args[0]);
 			freeall(gs), exit(EXIT_FAILURE);
 		}
-		nullargs(gs);
+		gs->args[0] = NULL;
+		gs->args[1] = NULL;
 		gs->lineNumber++;
 	}
 	freeall(gs);
