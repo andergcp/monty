@@ -12,10 +12,8 @@ gralStruct *initialize(char **argv)
 	gs = malloc(sizeof(gralStruct));
 	if (!gs)
 		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
-	gs->bufferSize = 10240;
-	gs->buffer = malloc(gs->bufferSize);
-	if (!gs->buffer)
-		fprintf(stderr, "Error: malloc failed\n"), free(gs), exit(EXIT_FAILURE);
+	gs->bufferSize = 0;
+	gs->buffer = NULL;
 	gs->args = malloc(sizeof(char *) * 3);
 	if (!gs->args)
 	{
@@ -57,7 +55,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 /*Gets and deals with each line of the file*/
-	while (fgets(gs->buffer, gs->bufferSize, gs->montyFile))
+	while (getline(&gs->buffer, &gs->bufferSize, gs->montyFile) != EOF)
 	{
 		_strtok(gs);
 		if (!gs->args[0])

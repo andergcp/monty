@@ -56,7 +56,7 @@ typedef struct generalStruct
 	instruction_t *dicciop;
 	stack_t *stack;
 	unsigned int lineNumber;
-	int bufferSize;
+	size_t bufferSize;
 	int modeSQ;
 	FILE *montyFile;
 } gralStruct;
