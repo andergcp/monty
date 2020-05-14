@@ -12,7 +12,7 @@ gralStruct *initialize(char **argv)
 	gs = malloc(sizeof(gralStruct));
 	if (!gs)
 		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
-	gs->bufferSize = 2048;
+	gs->bufferSize = 10240;
 	gs->buffer = malloc(gs->bufferSize);
 	if (!gs->buffer)
 		fprintf(stderr, "Error: malloc failed\n"), free(gs), exit(EXIT_FAILURE);
