@@ -67,12 +67,12 @@ void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	tmp = *stack;
 	while (tmp)
 	{
-		if (isascii(tmp->n) == 0)
+		if (!isascii(tmp->n) || tmp->n == 0)
 			break;
 		putchar(tmp->n);
 		tmp = tmp->next;
 	}
-	puts("");
+	putchar('\n');
 }
 /**
  * rotl - rotates the stack to the top.
