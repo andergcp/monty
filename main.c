@@ -107,7 +107,10 @@ int main(int argc, char **argv)
 	{
 		_strtok(gs);
 		if (!gs->args[0])
+		{
+			gs->lineNumber++;
 			continue;
+		}
 		res = executeOp(gs);
 		if (gs->args[0][0] == '#')
 		{
@@ -123,5 +126,5 @@ int main(int argc, char **argv)
 		gs->lineNumber++;
 	}
 	freeall(gs);
-	exit (EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
