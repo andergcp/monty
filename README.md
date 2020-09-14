@@ -16,8 +16,9 @@ You have to clone this repo and compile with gcc 4.8.4 using the flags -Wall -We
 $ git clone https://github.com/andergcp/monty
 $ cd monty
 $ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
-$ ./monty 001.m
+$ ./monty 000.m
 ```
+000.m is the file containing monty commands
 
 #### Valid op_codes
 - [X] **push**: pushes an element to the stack
