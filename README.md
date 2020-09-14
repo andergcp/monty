@@ -4,7 +4,7 @@
 <h3 align="center"> Stack, Queues - LIFO, FIFO </h3>
 
 #### Description
-We built and monty files (.m) interpreter with C programming language. Monty 0.98 is a scripting language that is first compiled into Monty byte codes. It relies on a unique stack, with specific instructions to manipulate it. We implement some op_codes like add, pop and print elements from the stack/queue.
+I built a monty files (.m) interpreter with C programming language. Monty 0.98 is a scripting language that is first compiled into Monty byte codes. It relies on a unique stack, with specific instructions to manipulate it. We implement some op_codes like add, pop and print elements from the stack/queue.
 
 **Monty byte code files**
 
@@ -13,7 +13,7 @@ Files containing Monty byte codes usually have the .m extension. Most of the ind
 #### Usage
 You have to clone this repo and compile with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic 
 ``` bash
-$ git clone https://github.com/davidgonzalezfx/monty
+$ git clone https://github.com/andergcp/monty
 $ cd monty
 $ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 $ ./monty 001.m
